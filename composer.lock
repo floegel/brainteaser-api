@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ed4ea3dcdd1f54d9034b6c72cfa11df0",
-    "content-hash": "9674d53e587abc7faed9dee1da679582",
+    "hash": "76d99f94e3bfaf96b27a04bb068548a9",
+    "content-hash": "9fe3a0b14659a953397a002f25745367",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1554,6 +1554,17 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2015-11-07 08:07:40"
+        },
+        {
+            "name": "swagger-api/swagger-ui",
+            "version": "dev-master",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/swagger-api/swagger-ui/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4349,6 +4360,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "swagger-api/swagger-ui": 20,
         "behat/behat": 5,
         "code-community/behat-web-api-extension": 20
     },

@@ -51,8 +51,10 @@ api-doc:
 	@echo "Copy swagger files and config"
 	@rm -rf ${dir}/web/api-doc
 	@mkdir -p ${dir}/web/api-doc
-	@cp -r ${dir}/swagger/* ${dir}/web/api-doc
+	@cp -r ${dir}/vendor/swagger-api/swagger-ui/dist/* ${dir}/web/api-doc
 	@cp ${dir}/swagger-config/api.yaml ${dir}/web/api-doc
+	@sed -i 's/petstore.swagger.io\/v2\/swagger.json/192.168.50.7\/api-doc\/api.yaml/g' ${dir}/web/api-doc/index.html
+	@sed -i 's/url: url,/url: url, validatorUrl: null,/g' ${dir}/web/api-doc/index.html
 	@echo "Browse to http://192.168.50.7/api-doc/#/default"
 
 
