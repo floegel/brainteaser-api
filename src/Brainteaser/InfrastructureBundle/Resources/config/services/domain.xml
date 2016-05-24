@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="Brainteaser\Domain\Training\TrainingFactory"
+                 id="brainteaser.domain.training.training_factory">
+        </service>
+        <service class="Brainteaser\Domain\Exercise\ColoredTiles\DifficultyFactory"
+                 id="brainteaser.domain.colored_tiles.difficulty_factory">
+        </service>
+        <service class="Brainteaser\Domain\Exercise\ColoredTiles\GridSizeFactory"
+                 id="brainteaser.domain.colored_tiles.grid_size_factory">
+        </service>
+        <service class="Brainteaser\Domain\Exercise\ColoredTiles\ColoredTilesFactory"
+                 id="brainteaser.domain.colored_tiles.colored_tiles_factory">
+        </service>
+        <service class="Brainteaser\Domain\Exercise\ColoredTiles\ColoredTilesExerciseFactory"
+                 id="brainteaser.domain.exercise.colored_tiles.colored_tiles_exercise_factory">
+            <argument id="brainteaser.domain.colored_tiles.difficulty_factory" type="service"/>
+            <argument id="brainteaser.domain.colored_tiles.grid_size_factory" type="service"/>
+            <argument id="brainteaser.domain.colored_tiles.colored_tiles_factory" type="service"/>
+        </service>
+    </services>
+</container>

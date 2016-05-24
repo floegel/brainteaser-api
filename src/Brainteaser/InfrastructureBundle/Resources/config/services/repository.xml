@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="Brainteaser\InfrastructureBundle\Repository\TrainingRepository"
+                 id="brainteaser_infrastructure.repository_doctrine.training_repository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service class="Brainteaser\InfrastructureBundle\Repository\ColoredTilesExerciseRepository"
+                 id="brainteaser_infrastructure.repository_doctrine.colored_tiles_exercise_repository">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+    </services>
+</container>

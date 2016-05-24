@@ -1,0 +1,36 @@
+# Training
+create_training:
+    path: /trainings
+    defaults: { _controller: brainteaser_infrastructure.controller_training.create_training_controller:handleRequest }
+    methods: [POST]
+
+get_training_highscores:
+    path: /trainings/highscores
+    defaults: { _controller: brainteaser_infrastructure.controller_training.get_highscores_controller:handleRequest }
+    methods: [GET]
+
+get_training:
+    path: /trainings/{training_id}
+    defaults: { _controller: brainteaser_infrastructure.controller_training.get_training_controller:handleRequest }
+    methods: [GET]
+
+update_training:
+    path: /trainings/{training_id}
+    defaults: { _controller: brainteaser_infrastructure.controller_training.update_training_controller:handleRequest }
+    methods: [PUT]
+
+# Exercise
+create_exercise:
+    path: /trainings/{training_id}/exercises
+    defaults: { _controller: brainteaser_infrastructure.controller_exercise.create_exercise_controller:handleRequest }
+    methods: [POST]
+
+get_exercise:
+    path: /trainings/{training_id}/exercises/{exercise_id}
+    defaults: { _controller: brainteaser_infrastructure.controller_exercise.get_exercise_controller:handleRequest }
+    methods: [GET]
+
+solve_exercise:
+    path: /trainings/{training_id}/exercises/{exercise_id}/solve
+    defaults: { _controller: brainteaser_infrastructure.controller_exercise.solve_exercise_controller:handleRequest }
+    methods: [POST]

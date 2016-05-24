@@ -1,0 +1,330 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Brainteaser-API
+host: 192.168.50.7
+produces:
+  - application/json
+paths:
+  '/trainings':
+    post:
+      description: |
+        Create a new training session
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful
+          schema:
+            $ref: '#/definitions/EmptyObject'
+          headers:
+            Location:
+              description: The uri of the created training
+              type: string
+
+  '/trainings/{training_id}':
+    get:
+      description: |
+        Fetch a training session
+      parameters:
+        - in: path
+          name: training_id
+          description: ID of the training that should be fetched
+          required: true
+          default: 83157cf2-d628-4a60-bf77-84fd2b759155
+          type: string
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/Training'
+        '404':
+          description: Training does not exist
+          schema:
+            $ref: '#/definitions/EmptyObject'
+
+  '/trainings/{training_id}/exercises':
+    post:
+      description: |
+        Create a new exercise
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: training_id
+          description: ID of the training the exercise should be created for
+          required: true
+          default: 83157cf2-d628-4a60-bf77-84fd2b759155
+          type: string
+      responses:
+        '201':
+          description: Successful
+          schema:
+            $ref: '#/definitions/EmptyObject'
+          headers:
+            Location:
+              description: The uri of the created exercise
+              type: string
+        '400':
+          description: |
+            Bad request
+
+            Error-Code | Cause
+            :--|:--
+            TRAINING-UNSOLVED-EXERCISES|There are unsolved exercises for the training that need to be solved before creating a new exercise
+            TRAINING-ALREADY-FINISHED|The training has already been finished
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Training does not exist
+          schema:
+            $ref: '#/definitions/EmptyObject'
+
+  '/trainings/{training_id}/exercises/{exercise_id}':
+    get:
+      description: |
+        Fetch an exercise
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: training_id
+          description: ID of the training the exercise was created for
+          required: true
+          default: c334443e-bcad-4b44-b704-f5773ac16e17
+          type: string
+        - in: path
+          name: exercise_id
+          description: ID of the exercise that should be fetched
+          required: true
+          default: 80d7c3a5-eee5-4e3a-aa08-872cfa970380
+          type: string
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/Exercise'
+        '404':
+          description: Exercise does not exist
+          schema:
+            $ref: '#/definitions/EmptyObject'
+
+  '/trainings/{training_id}/exercises/{exercise_id}/solve':
+    post:
+      description: |
+        Solve an exercise
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: training_id
+          description: ID of the training the exercise was created for
+          required: true
+          default: c334443e-bcad-4b44-b704-f5773ac16e17
+          type: string
+        - in: path
+          name: exercise_id
+          description: ID of the exercise that should be solved
+          required: true
+          default: 80d7c3a5-eee5-4e3a-aa08-872cfa970380
+          type: string
+        - in: body
+          name: solution
+          description: The expected solution for the exercise
+          required: true
+          default: '{"tiles": [
+                      {
+                        "x": 1,
+                        "y": 1
+                      },
+                      {
+                        "x": 3,
+                        "y": 0
+                      },
+                      {
+                        "x": 3,
+                        "y": 3
+                      },
+                      {
+                        "x": 3,
+                        "y": 2
+                      }
+                    ]}'
+          schema:
+            $ref: '#/definitions/SolveExercisePayload'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/SolveExerciseResult'
+        '400':
+          description: |
+            Bad request
+
+            Error-Code | Cause
+            :--|:--
+            INPUT-MALFORMED-JSON|The request payload contains malformed json
+            INPUT-MISSING-PARAMETER|The request payload does not contain all required parameters
+            INPUT-INVALID-VALUE|The request payload contains an invalid value for one the parameters. E.g. the tiles has been specified in an invalid format or the amount of tiles does not match the amount of colored tiles of the exercise
+            EXERCISE-ALREADY-SOLVED|The exercise has already been solved
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Exercise does not exist
+          schema:
+            $ref: '#/definitions/EmptyObject'
+
+  '/trainings/highscores':
+    get:
+      description: |
+        Get the highscore list for all trainings (Top 10)
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/TrainingCollection'
+
+definitions:
+  EmptyObject:
+    type: object
+  Error:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        $ref: '#/definitions/ErrorObject'
+  ErrorObject:
+    type: object
+    required:
+      - code
+      - http_code
+      - message
+    properties:
+      code:
+        type: string
+      http_code:
+        type: integer
+      message:
+        type: string
+  Tile:
+    type: object
+    required:
+      - x
+      - y
+    properties:
+      x:
+        type: integer
+      y:
+        type: integer
+  TileCollection:
+    type: array
+    items:
+      $ref: '#/definitions/Tile'
+  GridSize:
+    type: object
+    required:
+      - rows
+      - cols
+    properties:
+      rows:
+        type: integer
+      cols:
+        type: integer
+  Training:
+    type: object
+    required:
+      - data
+    properties:
+      data:
+        $ref: '#/definitions/TrainingData'
+  TrainingData:
+    type: object
+    required:
+      - id
+      - score
+      - num_exercises
+    properties:
+      id:
+        type: string
+      score:
+        type: integer
+      num_exercises:
+        type: integer
+  TrainingCollection:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/definitions/TrainingData'
+  Exercise:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/definitions/ExerciseData'
+  ExerciseData:
+      type: object
+      required:
+        - id
+        - num
+        - grid_size
+        - colored_tiles
+        - solved
+      properties:
+        id:
+          type: string
+        num:
+          type: integer
+        grid_size:
+          $ref: '#/definitions/GridSize'
+        colored_tiles:
+          $ref: '#/definitions/TileCollection'
+        solved:
+          type: boolean
+  SolveExercisePayload:
+    type: object
+    required:
+      - tiles
+    properties:
+      tiles:
+        $ref: '#/definitions/TileCollection'
+  SolveExerciseResult:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/definitions/SolveExerciseResultData'
+  SolveExerciseResultData:
+      type: object
+      required:
+        - correct
+        - wrong
+        - missing
+        - score
+      properties:
+        correct:
+          $ref: '#/definitions/TileCollection'
+        wrong:
+          $ref: '#/definitions/TileCollection'
+        missing:
+          $ref: '#/definitions/TileCollection'
+        score:
+          type: integer

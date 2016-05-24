@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Training -->
+        <service class="Brainteaser\InfrastructureBundle\Controller\Training\CreateTrainingController"
+                 id="brainteaser_infrastructure.controller_training.create_training_controller">
+            <argument id="brainteaser.infrastructure_bundle.response.json_response_factory" type="service"/>
+            <argument id="tactician.commandbus" type="service"/>
+        </service>
+        <service class="Brainteaser\InfrastructureBundle\Controller\Training\GetTrainingController"
+                 id="brainteaser_infrastructure.controller_training.get_training_controller">
+            <argument id="brainteaser.infrastructure_bundle.response.json_response_factory" type="service"/>
+            <argument id="brainteaser_infrastructure.repository_doctrine.training_repository" type="service"/>
+            <argument id="brainteaser.application.data_transformer.training_data_transformer" type="service"/>
+        </service>
+        <service class="Brainteaser\InfrastructureBundle\Controller\Training\GetHighscoresController"
+                 id="brainteaser_infrastructure.controller_training.get_highscores_controller">
+            <argument id="brainteaser.infrastructure_bundle.response.json_response_factory" type="service"/>
+            <argument id="brainteaser_infrastructure.repository_doctrine.training_repository" type="service"/>
+            <argument id="brainteaser.application.data_transformer.training_data_transformer" type="service"/>
+        </service>
+
+        <!-- Exercise -->
+        <service class="Brainteaser\InfrastructureBundle\Controller\Exercise\CreateExerciseController"
+                 id="brainteaser_infrastructure.controller_exercise.create_exercise_controller">
+            <argument id="brainteaser.infrastructure_bundle.response.json_response_factory" type="service"/>
+            <argument id="tactician.commandbus" type="service"/>
+        </service>
+        <service class="Brainteaser\InfrastructureBundle\Controller\Exercise\GetExerciseController"
+                 id="brainteaser_infrastructure.controller_exercise.get_exercise_controller">
+            <argument id="brainteaser.infrastructure_bundle.response.json_response_factory" type="service"/>
+            <argument id="brainteaser_infrastructure.repository_doctrine.colored_tiles_exercise_repository" type="service"/>
+            <argument id="brainteaser.application.data_transformer.colored_tiles_exercise_data_transformer" type="service"/>
+        </service>
+        <service class="Brainteaser\InfrastructureBundle\Controller\Exercise\SolveExerciseController"
+                 id="brainteaser_infrastructure.controller_exercise.solve_exercise_controller">
+            <argument id="brainteaser.infrastructure_bundle.response.json_response_factory" type="service"/>
+            <argument id="tactician.commandbus" type="service"/>
+            <argument id="brainteaser.application.data_transformer.solve_colored_tiles_exercise_result_data_transformer" type="service"/>
+        </service>
+    </services>
+</container>

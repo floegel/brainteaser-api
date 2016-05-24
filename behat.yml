@@ -1,0 +1,30 @@
+# behat.yml
+default:
+    autoload:
+        '': "%paths.base%/features/bootstrap"
+    suites:
+      default:
+          paths:
+              - "%paths.base%/features"
+          contexts:
+              - BrainteaserApiContext:
+                - http://192.168.50.7
+    formatters:
+        pretty: true
+        html:
+          output_path: %paths.base%/build/html/behat
+    extensions:
+        emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+          name: html
+          renderer: Twig
+          file_name: index
+          print_args: true
+          print_outp: true
+          loop_break: true
+
+ci:
+    suites:
+      default:
+          contexts:
+              - BrainteaserApiContext:
+                - http://localhost:8000

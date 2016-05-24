@@ -1,0 +1,75 @@
+{
+    "name": "floegel/brainteaser-api",
+    "type": "project",
+    "description": "A REST-API designed for a brain training",
+    "homepage": "http://github.com/floegel/brainteaser-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan Flögel",
+            "email": "hello@jan-floegel.de",
+            "homepage": "http://www.jan-floegel.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "symfony/symfony": "2.8.*",
+        "doctrine/orm": "^2.4.8",
+        "doctrine/doctrine-bundle": "~1.4",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~5.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "vlucas/phpdotenv": "^2.2",
+        "league/tactician-bundle": "~0.4"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~3.0",
+        "symfony/phpunit-bridge": "~2.7",
+        "behat/behat": "v3.1.0rc1",
+        "code-community/behat-web-api-extension" : "dev-master#8765ec0 as 1.0",
+        "guzzlehttp/guzzle": "^6.2",
+        "phpunit/phpunit": "5.3.*",
+        "emuse/behat-html-formatter": "^0.1.0",
+        "mockery/mockery": "^0.9.5"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-update-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "relative"
+    }
+}

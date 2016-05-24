@@ -1,0 +1,5 @@
+brainteaser_infrastructure:
+    resource: "@BrainteaserInfrastructureBundle/Resources/config/routing.yml"
+    prefix:   /
+
+

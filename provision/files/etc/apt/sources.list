@@ -1,0 +1,12 @@
+# deb cdrom:[Debian GNU/Linux 8.4.0 _Jessie_ - Official amd64 NETINST Binary-1 20160402-14:42]/ jessie main
+
+#deb cdrom:[Debian GNU/Linux 8.4.0 _Jessie_ - Official amd64 NETINST Binary-1 20160402-14:42]/ jessie main
+
+deb http://httpredir.debian.org/debian jessie main
+deb-src http://httpredir.debian.org/debian jessie main
+
+deb http://security.debian.org/ jessie/updates main
+deb-src http://security.debian.org/ jessie/updates main
+
+deb http://packages.dotdeb.org jessie all
+deb-src http://packages.dotdeb.org jessie all
