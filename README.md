@@ -11,7 +11,7 @@ Ein erweitertes Code-Sample von <a href="http://jan-floegel.de" target="_blank">
     Symfony, Doctrine, Tactician, PHPUnit, Mockery, Behat, Guzzle, Swagger, Make
 
 #### Konzepte:
-    DDD, CQRS, CommandBus, DotEnv, Controller as a Service
+    DDD, CQRS, CommandBus, DotEnv, Controller as a Service, Continuous integration
 
 ## Beschreibung
 Die Brainteaser-API ist eine REST-Schnittstelle über die ein Gehirntraining durchgeführt werden kann.
