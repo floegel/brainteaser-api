@@ -8,7 +8,7 @@ Ein erweitertes Code-Sample von <a href="http://jan-floegel.de" target="_blank">
     PHP7, PostgreSQL, nginx, Vagrant, Shell
 
 #### Frameworks/Tools:
-    Symfony, Doctrine, Tactician, PHPUnit, Mockery, Behat, Guzzle, Make
+    Symfony, Doctrine, Tactician, PHPUnit, Mockery, Behat, Guzzle, Swagger, Make
 
 #### Konzepte:
     DDD, CQRS, CommandBus, DotEnv, Controller as a Service
